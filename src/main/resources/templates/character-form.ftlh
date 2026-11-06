@@ -1,45 +1,121 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add a Character</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+<#import "layout.ftlh" as layout>
 
-<body>
+<@layout.page title=formTitle>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="details.html">Details</a>
-        <a href="about.html">About</a>
-        <a href="new-character-form.html">Add a Character</a>
-    </nav>
+    <h1>${formTitle}</h1>
 
-    <h1>Add a New Character</h1>
+    <p class="intro">
+        Enter the character information below.
+    </p>
 
-    <form>
+    <form
+        class="character-form"
+        action="${formAction}"
+        method="post"
+    >
 
-        <label for="name">Character Name:</label>
-        <input type="text" id="name" name="name">
+        <!-- Name -->
+        <label for="name">Name *</label>
 
-        <label for="universe">Universe:</label>
-        <input type="text" id="universe" name="universe">
+        <input
+            id="name"
+            name="name"
+            type="text"
+            maxlength="255"
+            value="${(character.name)!''}"
+            required
+        >
 
-        <label for="role">Role:</label>
-        <input type="text" id="role" name="role">
+        <#if validationErrors?? && validationErrors["name"]??>
+            <p class="field-error">
+                ${validationErrors["name"]}
+            </p>
+        </#if>
 
-        <label for="image">Image URL:</label>
-        <input type="url" id="image" name="image">
+        <!-- Description -->
+        <label for="description">
+            Description / Backstory *
+        </label>
 
-        <label for="description">Short Description:</label>
-        <textarea id="description" name="description" rows="5"></textarea>
+        <textarea
+            id="description"
+            name="description"
+            rows="6"
+            maxlength="2000"
+            required
+        >${(character.description)!''}</textarea>
 
-        <button type="submit">Add Character</button>
+        <#if validationErrors?? && validationErrors["description"]??>
+            <p class="field-error">
+                ${validationErrors["description"]}
+            </p>
+        </#if>
+
+        <!-- Universe -->
+        <label for="universe">Universe</label>
+
+        <input
+            id="universe"
+            name="universe"
+            type="text"
+            value="${(character.universe)!''}"
+            placeholder="Marvel"
+        >
+
+        <!-- Role -->
+        <label for="role">Role</label>
+
+        <input
+            id="role"
+            name="role"
+            type="text"
+            value="${(character.role)!''}"
+            placeholder="Superhero"
+        >
+
+        <!-- Power Level -->
+        <label for="powerLevel">Power Level</label>
+
+        <input
+            id="powerLevel"
+            name="powerLevel"
+            type="number"
+            min="0"
+            max="100"
+            value="<#if character.powerLevel??>${character.powerLevel?c}</#if>"
+        >
+
+        <#if validationErrors?? && validationErrors["powerLevel"]??>
+            <p class="field-error">
+                ${validationErrors["powerLevel"]}
+            </p>
+        </#if>
+
+        <!-- Image URL -->
+        <label for="imageUrl">Image URL</label>
+
+        <input
+            id="imageUrl"
+            name="imageUrl"
+            type="text"
+            value="${(character.imageUrl)!''}"
+            placeholder="/images/spider-man.jpg"
+        >
+
+        <!-- Submit -->
+        <button type="submit">
+            <#if editing>
+                Save Changes
+            <#else>
+                Add Character
+            </#if>
+        </button>
+
+        <a class="text-link" href="/">
+            Cancel
+        </a>
 
     </form>
 
-</body>
-
-</html>
+</@layout.page>
