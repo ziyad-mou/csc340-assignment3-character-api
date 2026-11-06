@@ -1,3 +1,4 @@
+
 /* General Page Styling */
 body {
     margin: 0;
@@ -6,7 +7,6 @@ body {
     color: #222;
     text-align: center;
 }
-
 
 /* Navigation Bar */
 nav {
@@ -25,7 +25,6 @@ nav a:hover {
     text-decoration: underline;
 }
 
-
 /* Main Heading */
 h1 {
     text-align: center;
@@ -33,29 +32,16 @@ h1 {
     margin-bottom: 10px;
 }
 
-
-/* Intro Paragraph */
-body>p {
-    text-align: center;
+.intro {
     font-size: 17px;
     color: #555;
 }
 
-
-/* Search Bar */
-input[type="text"] {
-    display: block;
-    width: 350px;
-    max-width: 80%;
-    margin: 25px auto 10px;
-    padding: 12px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+main {
+    padding-bottom: 44px;
 }
 
-
-/* Search Button */
+/* Buttons */
 button {
     display: block;
     margin: 0 auto 35px;
@@ -72,45 +58,45 @@ button:hover {
     background-color: #8f0000;
 }
 
+/* Character Gallery */
+.gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+}
 
-/* Character Cards */
 .character-card {
     display: inline-block;
     vertical-align: top;
     width: 280px;
     margin: 15px;
     padding: 20px;
+    box-sizing: border-box;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
     text-align: left;
 }
 
-
-/* Character Images */
 .character-card img {
     width: 100%;
     height: 300px;
     object-fit: cover;
     border-radius: 8px;
+    background-color: #e8e8e8;
 }
 
-
-/* Character Names */
 .character-card h2 {
     color: #b30000;
     margin-top: 15px;
     margin-bottom: 10px;
 }
 
-
-/* Character Information */
 .character-card p {
     line-height: 1.5;
 }
 
-
-/* View Details Link */
 .character-card a {
     display: inline-block;
     margin-top: 10px;
@@ -126,62 +112,55 @@ button:hover {
     background-color: #8f0000;
 }
 
-
-/* Mobile Friendly */
-@media (max-width: 600px) {
-
-    nav a {
-        display: block;
-        margin: 10px 0;
-    }
-
-    .character-card {
-        width: 80%;
-        margin: 15px auto;
-    }
+/* Search Form */
+.search-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 12px;
+    width: auto;
+    max-width: 950px;
+    margin: 24px auto 10px;
+    padding: 16px;
+    box-shadow: none;
+    background: transparent;
+    text-align: left;
 }
 
-/* Details Page */
-body>img {
-    width: 350px;
-    max-width: 80%;
-    height: auto;
-    border-radius: 10px;
-    margin: 20px auto;
+.search-form label {
     display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
-body>h2 {
-    color: #b30000;
-    margin-top: 30px;
-}
-
-body>p {
-    max-width: 800px;
-    margin: 10px auto;
-    padding: 0 20px;
-    line-height: 1.6;
-}
-
-body>a {
-    display: inline-block;
-    margin: 25px 0 40px;
-    padding: 10px 18px;
-    background-color: #b30000;
-    color: white;
-    text-decoration: none;
+.search-form input[type="text"] {
+    width: 240px;
+    max-width: 100%;
+    margin: 0;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
-body>a:hover {
-    background-color: #8f0000;
+.search-form button {
+    width: auto;
+    margin: 0;
 }
 
-/* Add Character Form */
-form {
+.text-link {
+    display: inline-block;
+    margin: 8px;
+    color: #b30000;
+}
+
+/* Forms */
+.character-form {
     width: 500px;
     max-width: 85%;
-    margin: 30px auto;
+    margin: 24px auto;
     padding: 25px;
     background-color: white;
     border-radius: 10px;
@@ -189,15 +168,16 @@ form {
     text-align: left;
 }
 
-form label {
+.character-form label {
     display: block;
     margin-top: 15px;
     margin-bottom: 5px;
     font-weight: bold;
 }
 
-form input,
-form textarea {
+.character-form input,
+.character-form textarea {
+    display: block;
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
@@ -206,10 +186,186 @@ form textarea {
     font-size: 16px;
 }
 
-form textarea {
+.character-form textarea {
     resize: vertical;
 }
 
-form button {
+.character-form button {
+    width: auto;
     margin: 20px 0 0;
+}
+
+.field-error {
+    color: #a50000;
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+/* Details Page */
+.details-card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    max-width: 1050px;
+    margin: 35px auto;
+    padding: 24px;
+    background: white;
+    border-radius: 12px;
+    text-align: left;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.13);
+}
+
+.details-image {
+    width: 340px;
+    max-width: 100%;
+    height: 440px;
+    object-fit: cover;
+    border-radius: 9px;
+}
+
+.details-content {
+    flex: 1;
+    min-width: 270px;
+}
+
+.details-content h1 {
+    text-align: left;
+    margin: 0 0 16px;
+}
+
+.details-content h2 {
+    color: #b30000;
+}
+
+.details-content p {
+    line-height: 1.7;
+}
+
+/* Details Buttons */
+.details-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+    align-items: center;
+}
+
+.action-link {
+    display: inline-block;
+    background: #b30000;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    padding: 11px 16px;
+    font-weight: bold;
+}
+
+.action-link.secondary {
+    background: #555;
+}
+
+/* Delete Button */
+.delete-form {
+    width: auto;
+    max-width: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    background: transparent;
+}
+
+.delete-form button {
+    width: auto;
+    margin: 0;
+}
+
+.danger-button {
+    background: #8b0000;
+}
+
+/* About Page */
+.about-content {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 18px 30px;
+    text-align: left;
+    line-height: 1.7;
+}
+
+.about-content h1,
+.about-content h2 {
+    text-align: left;
+}
+
+.about-image {
+    width: 260px;
+    max-width: 100%;
+    float: right;
+    margin: 0 0 16px 22px;
+    border-radius: 9px;
+}
+
+/* Messages */
+.flash-success {
+    background: #e8f7eb;
+    border: 1px solid #a5d7af;
+    color: #155724;
+    padding: 12px 16px;
+    border-radius: 6px;
+    max-width: 700px;
+    margin: 16px auto;
+}
+
+.empty-state {
+    margin: 30px auto;
+    padding: 16px;
+}
+
+.error-state {
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 650px) {
+
+    nav a {
+        display: block;
+        margin: 10px 0;
+    }
+
+    .search-form {
+        display: block;
+        width: 90%;
+        box-sizing: border-box;
+    }
+
+    .search-form input[type="text"] {
+        width: 100%;
+        margin-bottom: 12px;
+    }
+
+    .search-form button {
+        width: 100%;
+    }
+
+    .character-card {
+        width: 80%;
+        margin: 15px auto;
+    }
+
+    .details-card {
+        margin: 20px 12px;
+    }
+
+    .details-image {
+        width: 100%;
+        height: auto;
+        max-height: 480px;
+    }
+
+    .about-image {
+        float: none;
+        display: block;
+        margin: 10px auto;
+    }
 }
