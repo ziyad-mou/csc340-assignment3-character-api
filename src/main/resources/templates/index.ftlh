@@ -1,121 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
+<#import "layout.ftlh" as layout>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marvel Character Gallery</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="details.html">Details</a>
-        <a href="about.html">About</a>
-        <a href="new-character-form.html">Add a Character</a>
-    </nav>
+<@layout.page title="Marvel Character Gallery">
 
     <h1>Marvel Character Gallery</h1>
+
     <p>Explore some of Marvel's most iconic heroes.</p>
 
-    <input type="text" placeholder="Search characters...">
-    <button type="button">Search</button>
+    <!-- Display characters from the database -->
+    <#if characters?has_content>
 
-    <div class="character-card">
+        <#list characters as character>
 
-        <img src="images/spider-man.jpg" alt="Spider-Man">
-    
-        <h2>Spider-Man</h2>
-    
-        <p><strong>Universe:</strong> Marvel</p>
-        <p><strong>Role:</strong> Superhero</p>
-        <p><strong>Real Name:</strong> Peter Parker</p>
-    
-        <p>
-            Spider-Man is a young superhero with spider-like abilities who protects
-            New York City while balancing his everyday life as Peter Parker.
-        </p>
-    
-        <a href="details.html">View Details</a>
-    
-    </div>
+            <div class="character-card">
 
-    <div class="character-card">
+                <!-- Character Image -->
+                <#if character.imageUrl?has_content>
 
-        <img src="images/iron-man.jpg" alt="Iron Man">
-    
-        <h2>Iron Man</h2>
-    
-        <p><strong>Universe:</strong> Marvel</p>
-        <p><strong>Role:</strong> Superhero</p>
-        <p><strong>Real Name:</strong> Tony Stark</p>
-    
-        <p>
-            Iron Man is a brilliant inventor and billionaire who uses advanced
-            armored technology to protect the world as a superhero.
-        </p>
-    
-        <a href="details.html">View Details</a>
-    
-    </div>
+                    <img
+                        src="${character.imageUrl}"
+                        alt="${character.name}"
+                    >
 
-    <div class="character-card">
+                <#else>
 
-        <img src="images/thor.jpg" alt="Thor">
-    
-        <h2>Thor</h2>
-    
-        <p><strong>Universe:</strong> Marvel</p>
-        <p><strong>Role:</strong> Superhero</p>
-        <p><strong>Species:</strong> Asgardian</p>
-    
-        <p>
-            Thor is the powerful God of Thunder from Asgard who protects both his
-            home and Earth using his strength and enchanted hammer.
-        </p>
-    
-        <a href="details.html">View Details</a>
-    
-    </div>
-    <div class="character-card">
+                    <div style="height: 300px;
+                                background-color: #ddd;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                border-radius: 8px;">
+                        No image available
+                    </div>
 
-        <img src="images/black-panther.jpg" alt="Black Panther">
-    
-        <h2>Black Panther</h2>
-    
-        <p><strong>Universe:</strong> Marvel</p>
-        <p><strong>Role:</strong> Superhero</p>
-        <p><strong>Real Name:</strong> T'Challa</p>
-    
-        <p>
-            Black Panther is the king and protector of Wakanda, using advanced
-            technology, combat skills, and enhanced abilities to defend his people.
-        </p>
-    
-        <a href="details.html">View Details</a>
-    
-    </div>
-    <div class="character-card">
+                </#if>
 
-        <img src="images/doctor-strange.jpg" alt="Doctor Strange">
-    
-        <h2>Doctor Strange</h2>
-    
-        <p><strong>Universe:</strong> Marvel</p>
-        <p><strong>Role:</strong> Superhero</p>
-        <p><strong>Real Name:</strong> Stephen Strange</p>
-    
-        <p>
-            Doctor Strange is a powerful sorcerer who protects the world from
-            magical and mystical threats using his knowledge of the mystic arts.
-        </p>
-    
-        <a href="details.html">View Details</a>
-    
-    </div>
+                <!-- Character Name -->
+                <h2>${character.name}</h2>
 
-</body>
+                <!-- Character Information -->
+                <p>
+                    <strong>Universe:</strong>
+                    ${character.universe!'Unknown'}
+                </p>
 
-</html>
+                <p>
+                    <strong>Role:</strong>
+                    ${character.role!'Unknown'}
+                </p>
+
+                <p>
+                    <strong>Power Level:</strong>
+                    ${character.powerLevel!'Unknown'}
+                </p>
+
+                <!-- Character Description -->
+                <p>
+                    ${character.description?truncate(140)}
+                </p>
+
+                <!-- Details Page -->
+                <a href="/characters/${character.characterId?c}">
+                    View Details
+                </a>
+
+            </div>
+
+        </#list>
+
+    <#else>
+
+        <p>No characters found.</p>
+
+    </#if>
+
+</@layout.page>

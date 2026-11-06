@@ -28,6 +28,7 @@ public class MarvelCharacter {
     private String universe;
     private String role;
     private Integer powerLevel;
+    private String imageUrl;
 
     public MarvelCharacter() {
     }
@@ -78,5 +79,13 @@ public class MarvelCharacter {
 
     public void setPowerLevel(Integer powerLevel) {
         this.powerLevel = powerLevel;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
