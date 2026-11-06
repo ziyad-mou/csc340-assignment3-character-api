@@ -1,61 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spider-Man Details</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+<#import "layout.ftlh" as layout>
 
-<body>
+<@layout.page title=character.name + " - Character Details">
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="details.html">Details</a>
-        <a href="about.html">About</a>
-        <a href="new-character-form.html">Add a Character</a>
-    </nav>
+    <section class="details-card">
 
-    <h1>Spider-Man</h1>
+        <!-- Larger Character Image -->
+        <img
+            class="details-image"
+            src="${(character.imageUrl?has_content)?then(character.imageUrl, '/images/placeholder.svg')}"
+            alt="${character.name}"
+            onerror="this.onerror=null;this.src='/images/placeholder.svg';"
+        >
 
-    <img src="images/spider-man.jpg" alt="Spider-Man">
+        <div class="details-content">
 
-    <h2>Character Information</h2>
+            <h1>${character.name}</h1>
 
-    <p><strong>Real Name:</strong> Peter Parker</p>
+            <p>
+                <strong>Character ID:</strong>
+                ${character.characterId?c}
+            </p>
 
-    <p><strong>Universe:</strong> Marvel</p>
+            <p>
+                <strong>Universe:</strong>
+                ${(character.universe?has_content)?then(character.universe, 'Unknown')}
+            </p>
 
-    <p><strong>Role:</strong> Superhero</p>
+            <p>
+                <strong>Role:</strong>
+                ${(character.role?has_content)?then(character.role, 'Unknown')}
+            </p>
 
-    <p><strong>First Appearance:</strong> Amazing Fantasy #15</p>
+            <p>
+                <strong>Power Level:</strong>
 
-    <h2>Backstory</h2>
+                <#if character.powerLevel??>
+                    ${character.powerLevel?c}
+                <#else>
+                    Unknown
+                </#if>
+            </p>
 
-    <p>
-        Peter Parker became Spider-Man after being bitten by a radioactive spider.
-        The bite gave him superhuman strength, agility, enhanced reflexes, and the
-        ability to cling to walls. After learning that great power comes with great
-        responsibility, Peter uses his abilities to protect others.
-    </p>
+            <h2>Full Description</h2>
 
-    <h2>Abilities</h2>
+            <p>
+                ${character.description}
+            </p>
 
-    <p>
-        Spider-Man has superhuman strength, speed, agility, spider-sense, wall-crawling
-        abilities, and uses web-shooters that he designed himself.
-    </p>
+            <div class="details-actions">
 
-    <h2>Personality</h2>
+                <!-- Edit -->
+                <a
+                    class="action-link"
+                    href="/characters/${character.characterId?c}/edit"
+                >
+                    Edit Character
+                </a>
 
-    <p>
-        Peter Parker is intelligent, responsible, determined, and caring. He is also
-        known for using humor while fighting villains.
-    </p>
+                <!-- Delete -->
+                <form
+                    class="delete-form"
+                    method="post"
+                    action="/characters/${character.characterId?c}/delete"
+                    onsubmit="return confirm('Are you sure you want to delete this character?');"
+                >
+                    <button
+                        class="danger-button"
+                        type="submit"
+                    >
+                        Delete Character
+                    </button>
+                </form>
 
-    <a href="index.html">Back to Character Gallery</a>
+                <!-- Back to Gallery -->
+                <a
+                    class="action-link secondary"
+                    href="/"
+                >
+                    Back to Gallery
+                </a>
 
-</body>
+            </div>
 
-</html>
+        </div>
+
+    </section>
+
+</@layout.page>

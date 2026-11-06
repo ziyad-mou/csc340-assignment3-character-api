@@ -1,75 +1,109 @@
+
 <#import "layout.ftlh" as layout>
 
 <@layout.page title="Marvel Character Gallery">
 
     <h1>Marvel Character Gallery</h1>
 
-    <p>Explore some of Marvel's most iconic heroes.</p>
+    <p class="intro">
+        Explore some of Marvel's most iconic heroes.
+    </p>
 
-    <!-- Display characters from the database -->
+    <!-- Search and Filter -->
+    <form class="search-form" method="get" action="/">
+
+        <div>
+            <label for="search-name">Search by name</label>
+            <input
+                id="search-name"
+                type="text"
+                name="name"
+                value="${nameQuery!''}"
+                placeholder="e.g. Spider-Man"
+            >
+        </div>
+
+        <div>
+            <label for="search-universe">
+                Filter by universe
+            </label>
+            <input
+                id="search-universe"
+                type="text"
+                name="universe"
+                value="${universeQuery!''}"
+                placeholder="e.g. Marvel"
+            >
+        </div>
+
+        <button type="submit">Search</button>
+
+        <a class="text-link" href="/">
+            Clear filters
+        </a>
+
+    </form>
+
+    <!-- Character Gallery -->
     <#if characters?has_content>
 
-        <#list characters as character>
+        <div class="gallery-grid">
 
-            <div class="character-card">
+            <#list characters as character>
 
-                <!-- Character Image -->
-                <#if character.imageUrl?has_content>
+                <article class="character-card">
 
+                    <!-- Character Image -->
                     <img
-                        src="${character.imageUrl}"
+                        src="${(character.imageUrl?has_content)?then(character.imageUrl, '/images/placeholder.svg')}"
                         alt="${character.name}"
+                        onerror="this.onerror=null;this.src='/images/placeholder.svg';"
                     >
 
-                <#else>
+                    <!-- Character Name -->
+                    <h2>${character.name}</h2>
 
-                    <div style="height: 300px;
-                                background-color: #ddd;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                border-radius: 8px;">
-                        No image available
-                    </div>
+                    <!-- Character Information -->
+                    <p>
+                        <strong>Universe:</strong>
+                        ${(character.universe?has_content)?then(character.universe, 'Unknown')}
+                    </p>
 
-                </#if>
+                    <p>
+                        <strong>Role:</strong>
+                        ${(character.role?has_content)?then(character.role, 'Unknown')}
+                    </p>
 
-                <!-- Character Name -->
-                <h2>${character.name}</h2>
+                    <p>
+                        <strong>Power Level:</strong>
+                        <#if character.powerLevel??>
+                            ${character.powerLevel?c}
+                        <#else>
+                            Unknown
+                        </#if>
+                    </p>
 
-                <!-- Character Information -->
-                <p>
-                    <strong>Universe:</strong>
-                    ${character.universe!'Unknown'}
-                </p>
+                    <!-- Short Description -->
+                    <p>
+                        ${character.description?truncate(70)}
+                    </p>
 
-                <p>
-                    <strong>Role:</strong>
-                    ${character.role!'Unknown'}
-                </p>
+                    <!-- View Details -->
+                    <a href="/characters/${character.characterId?c}">
+                        View Details
+                    </a>
 
-                <p>
-                    <strong>Power Level:</strong>
-                    ${character.powerLevel!'Unknown'}
-                </p>
+                </article>
 
-                <!-- Character Description -->
-                <p>
-                    ${character.description?truncate(140)}
-                </p>
+            </#list>
 
-                <!-- Details Page -->
-                <a href="/characters/${character.characterId?c}">
-                    View Details
-                </a>
-
-            </div>
-
-        </#list>
+        </div>
 
     <#else>
 
-        <p>No characters found.</p>
+        <p class="empty-state">
+            No characters found.
+        </p>
 
     </#if>
 
