@@ -15,19 +15,23 @@
 
 <body>
 
-    <nav>
+    <nav aria-label="Main navigation">
         <a href="/">Home</a>
         <a href="/about">About</a>
         <a href="/characters/new">Add a Character</a>
     </nav>
 
-    <#if successMessage??>
-        <p class="success-message">
-            ${successMessage}
-        </p>
-    </#if>
+    <main>
 
-    <#nested>
+        <#if successMessage??>
+            <p class="flash-success" role="status">
+                ${successMessage}
+            </p>
+        </#if>
+
+        <#nested>
+
+    </main>
 
 </body>
 </html>

@@ -1,51 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Marvel Character Gallery</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+<#import "layout.ftlh" as layout>
 
-<body>
+<@layout.page title="About - Marvel Character Gallery">
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="details.html">Details</a>
-        <a href="about.html">About</a>
-        <a href="new-character-form.html">Add a Character</a>
-    </nav>
+    <section class="about-content">
 
-    <h1>About This Gallery</h1>
+        <h1>About the Marvel Character Gallery</h1>
 
-    <img src="images/spider-man.jpg" alt="Spider-Man">
+        <img
+            class="about-image"
+            src="/images/iron-man.jpg"
+            alt="Iron Man in his armor"
+        >
 
-    <p>
-        This website was created as a static character gallery featuring some of
-        Marvel's most well-known superheroes. The gallery includes Spider-Man,
-        Iron Man, Thor, Black Panther, and Doctor Strange.
-    </p>
+        <p>
+            The Marvel Character Gallery celebrates
+            some of the most memorable superheroes
+            from the Marvel universe.
+        </p>
 
-    <p>
-        I chose Marvel as the theme because its characters have different
-        backgrounds, abilities, personalities, and stories. This makes the theme
-        a good choice for creating a character gallery with a variety of content.
-    </p>
+        <p>
+            Visitors can explore different characters,
+            learn about their powers and stories,
+            search for characters, and view detailed
+            character information.
+        </p>
 
-    <p>
-        The website was designed using HTML and CSS. The goal was to keep the
-        layout simple, organized, easy to read, and visually appealing while
-        meeting the requirements of the static web app assignment.
-    </p>
+        <p>
+            The application also allows users to
+            add new characters, edit existing characters,
+            and delete characters from the database.
+        </p>
 
-    <p>
-        The site includes a home page with character cards, a character details
-        page, an about page, and a form for adding a new character.
-    </p>
+        <h2>How This Application Works</h2>
 
-    <a href="index.html">Back to Character Gallery</a>
+        <p>
+            This project combines the HTML and CSS
+            design from Assignment 2 with the
+            Spring Boot REST API and Neon PostgreSQL
+            database from Assignment 3.
+        </p>
 
-</body>
+        <p>
+            When a visitor opens a page, Spring Boot
+            receives an HTTP request through a
+            Page Controller.
+        </p>
 
-</html>
+        <p>
+            The Controller calls the Service, which
+            communicates with a JPA Repository to
+            retrieve or update information in the
+            Neon PostgreSQL database.
+        </p>
+
+        <p>
+            The Controller places the data inside
+            a Model. FreeMarker then combines
+            that information with HTML templates
+            to generate the completed website.
+        </p>
+
+        <h2>REST API</h2>
+
+        <p>
+            The application also maintains a REST API
+            at <code>/api/characters</code>.
+            The REST API returns JSON and shares
+            the same Service and database.
+        </p>
+
+    </section>
+
+</@layout.page>
