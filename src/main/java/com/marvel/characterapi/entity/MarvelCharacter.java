@@ -1,4 +1,3 @@
-
 package com.marvel.characterapi.entity;
 
 import jakarta.persistence.Column;
